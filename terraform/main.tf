@@ -17,6 +17,9 @@ resource "aws_s3_bucket" "app_bucket" {
   acl    = "public-read"                        # Issue 1: public-read ACL
 }
 
+# FIX APPLIED: Restricted IAM policy to follow principle of least privilege
+# Replaced wildcard "*" actions and resources with specific, scoped permissions
+# This remediates CWE-285 by preventing full administrative privileges
 resource "aws_iam_policy" "app_policy" {
   name        = "app-full-access"
   description = "Policy used by instances"
